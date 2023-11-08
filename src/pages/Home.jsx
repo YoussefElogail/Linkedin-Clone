@@ -8,7 +8,7 @@ const Home = () => {
     <Container>
       <Section>
         <h5>
-          <a href="">Hiring in a hurry? - </a>
+          <a href="#">{"Hiring in a hurry? - "}</a>
         </h5>
         <p>
           Find talented pros in record time with Upwork and keep business

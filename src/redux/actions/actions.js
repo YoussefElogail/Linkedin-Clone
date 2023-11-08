@@ -5,3 +5,17 @@ export const setUser = (payload) => {
     payload
   }
 }
+
+export const setLoading = (payload) => {
+  return{
+    type : actionTypes.SET_LOADING_STATUS,
+    payload
+  }
+}
+
+export const getArticles = (payload) => {
+  return{
+    type: actionTypes.GET_ARTICLES,
+    payload
+  }
+}
