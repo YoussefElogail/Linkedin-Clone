@@ -1,16 +1,23 @@
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
+import signInAPI from "../redux/actions";
+import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 const Login = () => {
   const {user} = useSelector((store)=> store.userState)
-  
+  console.log(user)
   const dispatch = useDispatch();
-
+  const navigate = useNavigate()
+  useEffect(() => {
+    user ? navigate("/home") : null
+  },[user])
   return (
     <Container>
+      
       <Nav>
         <a href="/index.html">
-          <img src="public/image/login-logo.svg" alt="" />
+          <img src="public/images/login-logo.svg" alt="" />
         </a>
         <div>
           <Join>Join now</Join>
@@ -20,11 +27,11 @@ const Login = () => {
       <Section>
         <Hero>
           <h1>Welcome to your professional community</h1>
-          <img src="public/image/login-hero.svg" alt="" />
+          <img src="public/images/login-hero.svg" alt="" />
         </Hero>
         <Form>
-          <Google onClick={() => {dispatch()}}>
-            <img src="public/image/google.svg" alt="" />
+          <Google onClick={() => {dispatch(signInAPI())}}>
+            <img src="public/images/google.svg" alt="" />
             <span>Sign in with Google</span>
           </Google>
         </Form>
