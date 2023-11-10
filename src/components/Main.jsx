@@ -1,12 +1,18 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import styled from "styled-components";
 import PostModal from "./PostModal";
+import ReactPlayer from "react-player";
+import Article from "./Article";
+import { getArticlesAPI } from "../redux/actions";
 const Main = (props) => {
   const [showModale, setShowModale] = useState(false);
   const handleClick = () => {
     return setShowModale(!showModale);
   };
+  useEffect(() => {
+    props.getArticles()
+  },[])
   return (
     <Container>
       <ShareBox>
@@ -39,8 +45,18 @@ const Main = (props) => {
           </button>
         </div>
       </ShareBox>
-      <Content></Content>
-      <PostModal {...{showModale, handleClick}}/>
+      {props.articles.length === 0 ? (
+        <p>There are no articles</p>
+      ) : (
+        <Content>
+          {props.loading && <img src="public/images/loader.svg" />}
+          {props.articles.length > 0 &&
+            props.articles.map((article, index) => (
+              <Article article={article} key={index} />
+            ))}
+        </Content>
+      )}
+      <PostModal {...{ showModale, handleClick }} />
     </Container>
   );
 };
@@ -142,4 +158,10 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps)(Main);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getArticles: () => dispatch(getArticlesAPI()),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Main);

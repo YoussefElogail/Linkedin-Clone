@@ -2,26 +2,60 @@ import { useState } from "react";
 import { connect } from "react-redux";
 import ReactPlayer from "react-player";
 import styled from "styled-components";
+import { Timestamp } from "firebase/firestore";
+import { postArticleAPI } from "../redux/actions";
 
-const PostModal = ({ showModale, handleClick, user }) => {
+const PostModal = ({ showModale, handleClick, user , postArticles}) => {
   const [editorText, setEditorText] = useState("");
   const [assetArea, setAssetArea] = useState("");
   const [shareImage, setShareImage] = useState("");
   const [videoLink, setVideoLink] = useState("");
 
+  const seitchAssetArea = (area) => {
+    setShareImage("");
+    setVideoLink("");
+    setAssetArea(area);
+  };
+
+  const handleChange = (e) => {
+    const image = e.target.files[0];
+    if (image === "" || image === undefined) {
+      alert(`Not an image, The file is a ${typeof image}`);
+      return;
+    } else {
+      setShareImage(image);
+    }
+  };
+  const handlePostArticles = (e) => {
+    e.preventDefault();
+    if (e.target !== e.currentTarget) {
+      return;
+    }
+    const payload = {
+      image: shareImage,
+      video: videoLink,
+      user,
+      // Timestamp.now() => use to get time and date when set post
+      timeStamp: Timestamp.now(),
+      description : editorText
+    };
+    postArticles(payload)
+    reset()
+  };
+
   const reset = () => {
-    setEditorText("")
-    setShareImage("")
-    setVideoLink("")
-    setAssetArea("")
-    handleClick()
-  }
-  
+    setEditorText("");
+    setShareImage("");
+    setVideoLink("");
+    setAssetArea("");
+    handleClick();
+  };
+
   return (
     <>
       {showModale && (
         <Container>
-          <Content >
+          <Content>
             <Header>
               <h2>Create a post</h2>
               <button onClick={reset}>
@@ -31,7 +65,11 @@ const PostModal = ({ showModale, handleClick, user }) => {
             <ShareContent>
               <UserInfo>
                 {user && user.photoURL ? (
-                  <img src={user.photoURL} alt="" />
+                  <img
+                    referrerPolicy="no-referrer"
+                    src={user.photoURL}
+                    alt=""
+                  />
                 ) : (
                   <img src="/images/user.svg" alt="" />
                 )}
@@ -50,7 +88,7 @@ const PostModal = ({ showModale, handleClick, user }) => {
                       type="file"
                       name="image"
                       id="file"
-                      // onChange={handleChange}
+                      onChange={handleChange}
                       style={{ display: "none" }}
                     />
                     <label
@@ -63,7 +101,9 @@ const PostModal = ({ showModale, handleClick, user }) => {
                     >
                       Select an image to share
                     </label>
-                    {shareImage && <img src={shareImage} alt="" />}
+                    {shareImage && (
+                      <img src={URL.createObjectURL(shareImage)} alt="" />
+                    )}
                   </UploadImage>
                 ) : (
                   assetArea === "media" && (
@@ -73,7 +113,11 @@ const PostModal = ({ showModale, handleClick, user }) => {
                         value={videoLink}
                         onChange={(e) => setVideoLink(e.target.value)}
                         placeholder="Please input a video link"
-                        style={{ width: "100%", height: "30px",marginBottom: "15px" }}
+                        style={{
+                          width: "100%",
+                          height: "30px",
+                          marginBottom: "15px",
+                        }}
                       />
                       {videoLink && (
                         <>
@@ -87,10 +131,10 @@ const PostModal = ({ showModale, handleClick, user }) => {
             </ShareContent>
             <ShareCreation>
               <AttachAssets>
-                <AssetButton onClick={() => setAssetArea("image")}>
+                <AssetButton onClick={() => seitchAssetArea("image")}>
                   <img src="public/images/share-image.svg" alt="" />
                 </AssetButton>
-                <AssetButton onClick={() => setAssetArea("media")}>
+                <AssetButton onClick={() => seitchAssetArea("media")}>
                   <img src="public/images/share-video.svg" alt="" />
                 </AssetButton>
               </AttachAssets>
@@ -100,7 +144,12 @@ const PostModal = ({ showModale, handleClick, user }) => {
                   Anyone
                 </AssetButton>
               </ShareComment>
-              <PostButton disabled={editorText ? false : true}>Post</PostButton>
+              <PostButton
+                disabled={editorText ? false : true}
+                onClick={(e) => handlePostArticles(e)}
+              >
+                Post
+              </PostButton>
             </ShareCreation>
           </Content>
         </Container>
@@ -294,4 +343,11 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps)(PostModal);
+const mapDispatchToProps = (dispatch) => {
+  return{
+    postArticles : (payload) => dispatch(postArticleAPI(payload))
+
+  }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(PostModal);

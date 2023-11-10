@@ -1,17 +1,17 @@
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { signOutAPI } from "../redux/actions";
+import { Link } from "react-router-dom";
 const Header = () => {
   const { user } = useSelector((store) => store.userState);
-  console.log(user);
   const dispatch = useDispatch();
   return (
     <Container>
       <Content>
         <Logo>
-          <a href="/home">
+          <Link to="/home">
             <img src="public/images/home-logo.svg" alt="" />
-          </a>
+          </Link>
         </Logo>
         <Search>
           <div>
@@ -24,33 +24,33 @@ const Header = () => {
         <Nav>
           <NavListWrap>
             <NavList>
-              <a href="">
+              <a href="#">
                 <img src="public/images/nav-network.svg" alt="" />
                 <span>My Network</span>
               </a>
             </NavList>
             <NavList>
-              <a href="">
+              <a href="#">
                 <img src="public/images/nav-jobs.svg" alt="" />
                 <span>Jobs</span>
               </a>
             </NavList>
             <NavList>
-              <a href="">
+              <a href="#">
                 <img src="public/images/nav-messaging.svg" alt="" />
                 <span>Messaging</span>
               </a>
             </NavList>
             <NavList>
-              <a href="">
+              <a href="#">
                 <img src="public/images/nav-notifications.svg" alt="" />
                 <span>Notifications</span>
               </a>
             </NavList>
             <User>
-              <a href="">
+              <a href="#">
                 {user ? (
-                  <img src={user.photoURL} alt="" />
+                  <img referrerPolicy="no-referrer" src={user.photoURL} alt="" />
                 ) : (
                   <img src="public/images/user.svg" alt="" />
                 )}
@@ -58,12 +58,12 @@ const Header = () => {
                   Me <img src="public/images/down-icon.svg" alt="" />
                 </span>
               </a>
-              <SignOut onClick={() => dispatch(signOutAPI())}>
-                <a href="">Sign Out</a>
+              <SignOut>
+                <div onClick={() => dispatch(signOutAPI())}>Sign Out</div>
               </SignOut>
             </User>
             <Work>
-              <a href="">
+              <a href="#">
                 <img src="public/images/nav-work.svg" alt="" />
                 <span>
                   Work

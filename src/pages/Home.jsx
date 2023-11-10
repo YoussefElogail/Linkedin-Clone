@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import LeftSide from "../components/LeftSide";
 import Main from "../components/Main";
-import RightSidr from "../components/RightSidr";
+import RightSidr from "../components/RightSide";
 
 const Home = () => {
   return (

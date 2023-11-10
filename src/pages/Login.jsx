@@ -6,7 +6,6 @@ import { useEffect } from "react";
 
 const Login = () => {
   const {user} = useSelector((store)=> store.userState)
-  console.log(user)
   const dispatch = useDispatch();
   const navigate = useNavigate()
   useEffect(() => {
