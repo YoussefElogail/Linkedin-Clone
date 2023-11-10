@@ -49,7 +49,7 @@ const Main = (props) => {
         <p>There are no articles</p>
       ) : (
         <Content>
-          {props.loading && <img src="public/images/loader.svg" />}
+          {props.loading && <img src="/images/loader.svg" />}
           {props.articles.length > 0 &&
             props.articles.map((article, index) => (
               <Article article={article} key={index} />

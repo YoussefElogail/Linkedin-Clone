@@ -10,14 +10,14 @@ const Header = () => {
       <Content>
         <Logo>
           <Link to="/home">
-            <img src="public/images/home-logo.svg" alt="" />
+            <img src="/images/home-logo.svg" alt="" />
           </Link>
         </Logo>
         <Search>
           <div>
             <input type="text" placeholder="Search" />
             <SearchIcon>
-              <img src="public/images/search-icon.svg" alt="" />
+              <img src="/images/search-icon.svg" alt="" />
             </SearchIcon>
           </div>
         </Search>
@@ -25,25 +25,25 @@ const Header = () => {
           <NavListWrap>
             <NavList>
               <a href="#">
-                <img src="public/images/nav-network.svg" alt="" />
+                <img src="/images/nav-network.svg" alt="" />
                 <span>My Network</span>
               </a>
             </NavList>
             <NavList>
               <a href="#">
-                <img src="public/images/nav-jobs.svg" alt="" />
+                <img src="/images/nav-jobs.svg" alt="" />
                 <span>Jobs</span>
               </a>
             </NavList>
             <NavList>
               <a href="#">
-                <img src="public/images/nav-messaging.svg" alt="" />
+                <img src="/images/nav-messaging.svg" alt="" />
                 <span>Messaging</span>
               </a>
             </NavList>
             <NavList>
               <a href="#">
-                <img src="public/images/nav-notifications.svg" alt="" />
+                <img src="/images/nav-notifications.svg" alt="" />
                 <span>Notifications</span>
               </a>
             </NavList>
@@ -52,10 +52,10 @@ const Header = () => {
                 {user ? (
                   <img referrerPolicy="no-referrer" src={user.photoURL} alt="" />
                 ) : (
-                  <img src="public/images/user.svg" alt="" />
+                  <img src="/images/user.svg" alt="" />
                 )}
                 <span>
-                  Me <img src="public/images/down-icon.svg" alt="" />
+                  Me <img src="/images/down-icon.svg" alt="" />
                 </span>
               </a>
               <SignOut>
@@ -64,10 +64,10 @@ const Header = () => {
             </User>
             <Work>
               <a href="#">
-                <img src="public/images/nav-work.svg" alt="" />
+                <img src="/images/nav-work.svg" alt="" />
                 <span>
                   Work
-                  <img src="public/images/down-icon.svg" alt="" />
+                  <img src="/images/down-icon.svg" alt="" />
                 </span>
               </a>
             </Work>

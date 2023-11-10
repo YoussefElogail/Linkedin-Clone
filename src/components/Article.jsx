@@ -19,7 +19,7 @@ const Article = ({article}) => {
                     </div>
                   </a>
                   <button>
-                    <img src="public/images/ellipsis.svg" />
+                    <img src="images/ellipsis.svg" />
                   </button>
                 </SharedActor>
                 <Description>{article.description}</Description>

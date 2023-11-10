@@ -59,7 +59,7 @@ const PostModal = ({ showModale, handleClick, user , postArticles}) => {
             <Header>
               <h2>Create a post</h2>
               <button onClick={reset}>
-                <img src="public/images/close-icon.svg" alt="" />
+                <img src="/images/close-icon.svg" alt="" />
               </button>
             </Header>
             <ShareContent>
@@ -132,15 +132,15 @@ const PostModal = ({ showModale, handleClick, user , postArticles}) => {
             <ShareCreation>
               <AttachAssets>
                 <AssetButton onClick={() => seitchAssetArea("image")}>
-                  <img src="public/images/share-image.svg" alt="" />
+                  <img src="/images/share-image.svg" alt="" />
                 </AssetButton>
                 <AssetButton onClick={() => seitchAssetArea("media")}>
-                  <img src="public/images/share-video.svg" alt="" />
+                  <img src="/images/share-video.svg" alt="" />
                 </AssetButton>
               </AttachAssets>
               <ShareComment>
                 <AssetButton>
-                  <img src="public/images/share-comment.svg" alt="" />
+                  <img src="/images/share-comment.svg" alt="" />
                   Anyone
                 </AssetButton>
               </ShareComment>
